@@ -1,0 +1,28 @@
+version: "3.4"
+
+services:
+
+  server:
+    container_name: "cifar-classifier-server"
+    build:
+      dockerfile: Dockerfile
+    command: "${API_COMMAND}"
+    ports:
+      - "7776:7776"
+    env_file:
+      - .env
+    volumes:
+      - ./project/:/project
+    networks:
+      - cifar-classifier-net
+    restart: unless-stopped
+
+networks:
+  cifar-classifier-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.140.0.0/24
+
+
+    

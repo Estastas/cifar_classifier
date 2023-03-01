@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "cifar-classifier"
+version = "0.1.0"
+description = "cifar classifier"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "cifar_classifier"}]
+
+[tool.poetry.dependencies]
+python = "^3.8.5"
+pillow = "^9.4.0"
+opencv-python = "^4.7.0.72"
+telebot = "^0.0.5"
+torchvision = "^0.14.1"
+starlette = "^0.25.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
