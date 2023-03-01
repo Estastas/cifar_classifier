@@ -31,6 +31,8 @@ class Predict:
         image = Image.open(path)
         image = image.resize((32, 32))
 
+        image.save(path)
+
         convert_tensor = transforms.ToTensor()
         image_tensor = convert_tensor(image)
 
