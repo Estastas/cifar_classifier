@@ -18,6 +18,7 @@ class Predict:
                    8: 'Корабль',
                    9: 'Грузовик'}
         self._model_save_load = ModelSaveLoad(weight_path=weight_path)
+        self.net = self._model_save_load.load_model()
 
     def get_classes(self) -> str:
 
@@ -33,8 +34,7 @@ class Predict:
         convert_tensor = transforms.ToTensor()
         image_tensor = convert_tensor(image)
 
-        net = self._model_save_load.load_model()
-        prediction = net(image_tensor.unsqueeze(0))
+        prediction = self.net(image_tensor.unsqueeze(0))
         class_pred = prediction.argmax(dim=1)
 
         return self.classes[int(class_pred)]
