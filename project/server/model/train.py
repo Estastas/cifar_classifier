@@ -19,7 +19,7 @@ class Trainer:
         X_test = X_test.to(device)
         y_test = y_test.to(device)
 
-        for epoch in range(30):
+        for epoch in range(3):
             order = np.random.permutation(len(X_train))
             for start_index in range(0, len(X_train), batch_size):
                 optimizer.zero_grad()
