@@ -28,6 +28,35 @@ class Predict:
 
         return ', '.join(str(x) for x in list_classes)
 
+    def dict_sorted_prediction(self, prediction) -> dict:
+
+        class_preds = {}
+        for key in self.classes:
+            class_preds[self.classes[key]] = float(prediction[0, key])
+
+        sorted_values = list(class_preds.values())
+        sorted_values.sort()
+        sorted_values.reverse()
+
+        sorted_dict = {}
+        for i in sorted_values:
+            for k in class_preds.keys():
+                if class_preds[k] == i:
+                    sorted_dict[k] = class_preds[k]
+
+        return sorted_dict
+
+    def text_prediction(self, prediction) -> str:
+
+        dict_prediction = self.dict_sorted_prediction(prediction=prediction)
+
+        converted = str()
+
+        for key in dict_prediction:
+            converted += key + ": " + str(dict_prediction[key]) + "\n"
+
+        return converted
+
     def make_prediction(self, path) -> str:
 
         image = Image.open(path)
@@ -40,6 +69,5 @@ class Predict:
 
         prediction = self.net(image_tensor.unsqueeze(0))
         prediction = torch.nn.functional.softmax(prediction, dim=1).data.cpu().numpy()
-        class_pred = np.argmax(prediction)
 
-        return self.classes[int(class_pred)]
+        return self.text_prediction(prediction=prediction)
