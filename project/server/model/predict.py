@@ -1,3 +1,5 @@
+import torch
+import numpy as np
 from PIL import Image
 from torchvision import transforms
 
@@ -37,6 +39,7 @@ class Predict:
         image_tensor = convert_tensor(image)
 
         prediction = self.net(image_tensor.unsqueeze(0))
-        class_pred = prediction.argmax(dim=1)
+        prediction = torch.nn.functional.softmax(prediction, dim=1).data.cpu().numpy()
+        class_pred = np.argmax(prediction)
 
         return self.classes[int(class_pred)]
