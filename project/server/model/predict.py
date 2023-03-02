@@ -50,7 +50,7 @@ class Predict:
 
         dict_prediction = self.dict_sorted_prediction(prediction=prediction)
 
-        converted = str('Хм... Мне кажется список вероятностей принадлежности классу такой:.\n\n')
+        converted = str('Хм... Мне кажется список вероятностей принадлежности классу такой:\n\n')
 
         for key in dict_prediction:
             converted += key + ": " + f'{str(dict_prediction[key])}%' + "\n"

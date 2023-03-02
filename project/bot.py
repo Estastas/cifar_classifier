@@ -16,7 +16,7 @@ predict = Predict(weight_path=WEIGHTS_PATH)
 def send_welcome(message):
     """Responds to requests  /start и /help."""
 
-    text = ('Привет я могу помочь в классификации следующих класссов:.\n\n'
+    text = ('Привет, я могу помочь в классификации следующих класссов:\n\n'
             + predict.get_classes()
             + '.\n\nВысылай фото ответным сообщением.\n\n')
 
