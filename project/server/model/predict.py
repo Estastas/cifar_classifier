@@ -32,7 +32,7 @@ class Predict:
 
         class_preds = {}
         for key in self.classes:
-            class_preds[self.classes[key]] = float(prediction[0, key])
+            class_preds[self.classes[key]] = round(float(prediction[0, key]) * 100, 2)
 
         sorted_values = list(class_preds.values())
         sorted_values.sort()
@@ -50,10 +50,10 @@ class Predict:
 
         dict_prediction = self.dict_sorted_prediction(prediction=prediction)
 
-        converted = str()
+        converted = str('Хм... Мне кажется список вероятностей принадлежности классу такой:.\n\n')
 
         for key in dict_prediction:
-            converted += key + ": " + str(dict_prediction[key]) + "\n"
+            converted += key + ": " + f'{str(dict_prediction[key])}%' + "\n"
 
         return converted
 
